@@ -1,0 +1,18 @@
+# mac junk
+.DS_Store
+
+# visual studio code junk
+.vscode/
+.vscode/settings.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Node
+node_modules
