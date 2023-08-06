@@ -1,7 +1,10 @@
+const { default: mongoose } = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const User = require('./models/user.js');
 require('dotenv').config();
 
+mongoose.connect(process.env.MONGO_URI);
 
 // env variables
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -14,10 +17,11 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
-    /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return done(err, user);
-    });*/
-    return done(null, profile);
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      //return done(err, user);
+      return done(err, profile);
+    });
+    //return done(null, profile);
   }
 ));
 

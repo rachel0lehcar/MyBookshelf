@@ -7,7 +7,11 @@ require('./auth');
 
 
 const app = express();
-app.use(session({ secret: process.env.SESSION_SECRET })); // env variable
+app.use(session({ 
+  secret: process.env.SESSION_SECRET, // env variable
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
