@@ -1,10 +1,13 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import AddBook from './components/pages/AddBook';
+import Home from './components/pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      <h1>What up world</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/addbook" element={<AddBook />} />
+    </Routes>
   );
 }
 

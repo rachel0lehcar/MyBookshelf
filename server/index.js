@@ -2,15 +2,23 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 //const mongoose = require('mongoose');
+//const cors = require('cors');
+const axios = require('axios');
 require('dotenv').config();
 require('./auth');
 
 
 const app = express();
+
+//app.use(cors());
 app.use(session({ 
   secret: process.env.SESSION_SECRET, // env variable
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    sameSite: 'none',
+    secure: 'true'
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -56,5 +64,17 @@ app.get('/logout', (req, res, next) => {
 });
 
 /*---------------------------*/
+
+app.get('/googlebooks/:book', (req, res) => {
+  //console.log('hit');
+  const book = req.params.book;
+  console.log(book);
+  //console.log(req.params);
+  axios.get('https://www.googleapis.com/books/v1/volumes?q=' + book + '&key=' + process.env.API_KEY + "&maxResults=40")
+    .then(data => {
+      //console.log(data);
+      res.json(data.data.items);
+    });
+});
 
 app.listen(5000, () => console.log('listening on: 5000'));
