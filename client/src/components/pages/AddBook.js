@@ -29,7 +29,7 @@ function AddBook() {
   }
 
   return (
-    <>
+    <div className="page-content">
       <h1>Find Your Book</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -50,7 +50,7 @@ function AddBook() {
           alt={book.title}
         />
       ))}
-    </>
+    </div>
   );
 }
 

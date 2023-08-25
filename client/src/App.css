@@ -1,0 +1,26 @@
+:root {
+  --hot-pink: #FFAAD4;
+  --lavendar: #D8D8FF;
+}
+
+* {
+  font-family: 'Inria Sans';
+  margin: 0;
+  padding: 0;
+}
+
+.page-content {
+  margin: 15px;
+  margin-top: 80px;
+}
+
+html {
+  background: linear-gradient(var(--hot-pink), var(--lavendar));
+  min-height: 100%;
+}
+
+@media screen and (max-width: 867px) {
+  .page-content {
+    margin-top: 100px;
+  }
+}

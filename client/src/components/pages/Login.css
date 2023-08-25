@@ -1,0 +1,127 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  box-sizing: border-box;
+  width: 481.5px;
+  height: 649.8px;;
+  background: var(--lavendar);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  border: solid black 2px;
+}
+
+.title {
+  margin-top: 0;
+  text-align: center;
+  font-size: 36px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Rectangle 10 */
+
+.uspass, .google-login{
+  box-sizing: border-box;
+
+  width: 302.4px;
+  height: 44.1px;
+
+  background: #F2F9FF;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.google-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 45px;
+  margin-bottom: 45px;
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (max-width: 867px){
+  /*.upass, .google-login, button {
+    width: auto;
+  }*/
+  .text {
+    display: none;
+  }
+  /*.login-card {
+    
+  }*/
+}
+
+.signup {
+  text-decoration: none;
+  color: black;
+}
+
+.element {
+  display: flex;
+  flex-direction: column;
+  /*margin-bottom: 50px;*/
+  margin-bottom: 25px;
+}
+
+.login-submit {
+  box-sizing: border-box;
+
+  width: 302.4px;
+  height: 44.1px;
+
+  background: #DBFFCE;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.option {
+  width: 80%;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+
+  text-align: center; 
+  border-bottom: 1px solid #000; 
+}
+
+.option span {
+  background:var(--lavendar); 
+  padding:0 10px;
+}
+
+.signup-link {
+  margin: 0;
+}
+
+
+
