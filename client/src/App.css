@@ -1,6 +1,10 @@
 :root {
+  /* COLORS */
   --hot-pink: #FFAAD4;
   --lavendar: #D8D8FF;
+
+  /* FONT SIZES */
+
 }
 
 * {
@@ -12,6 +16,15 @@
 .page-content {
   margin: 15px;
   margin-top: 80px;
+}
+
+.basic-button {
+  background: #F2F9FF;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 10px 25px 10px 25px;
+  font-size: 25px;
+  cursor: pointer;
 }
 
 html {

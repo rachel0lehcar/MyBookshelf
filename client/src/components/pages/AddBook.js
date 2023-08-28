@@ -1,4 +1,5 @@
 import React, { useState} from 'react'
+import "./AddBook.css"
 //import axios from 'axios';
 
 function AddBook() {
@@ -30,26 +31,31 @@ function AddBook() {
 
   return (
     <div className="page-content">
-      <h1>Find Your Book</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Find Book</h1>
+      <form className="search-form"onSubmit={handleSubmit}>
         <div>
           <input 
+            className='search-bar'
             type="text" 
             onChange={handleChange}
-            placeholder='Search for Books' 
+            /*placeholder='Search for Books'*/
             autoComplete='off'/>
         </div>
-        <button type="submit">Search</button>
+        <button className="basic-button" type="submit">SEARCH</button>
       </form>
-      {result.map((book,index) => (
-        <img key={index} src={
-            book.volumeInfo.imageLinks === undefined
-            ? ""
-            : `${book.volumeInfo.imageLinks.thumbnail}`
-          }
-          alt={book.title}
-        />
-      ))}
+      <div className='center'>
+        <div className="search-results">
+          {result.map((book,index) => (
+            <img className="book" key={index} src={
+                book.volumeInfo.imageLinks === undefined
+                ? ""
+                : `${book.volumeInfo.imageLinks.thumbnail}`
+              }
+              alt={book.title}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
