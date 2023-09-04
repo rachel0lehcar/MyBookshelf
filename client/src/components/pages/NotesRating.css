@@ -1,0 +1,24 @@
+.notes-rating-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finish-date {
+  display: flex;
+}
+
+.user-notes {
+  box-sizing: border-box;
+
+  width: 947px;
+  height: 391px;
+
+  padding: 35px 95px 35px 95px;
+  
+  background: #F1F4FF;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  font-size: 20px;
+
+}
