@@ -1,6 +1,6 @@
 import React from 'react'
 //import Select from 'react-select'
-import './NotesRating.css'
+import './pagestyles/NotesRating.css'
 
 function NotesRating() {
 

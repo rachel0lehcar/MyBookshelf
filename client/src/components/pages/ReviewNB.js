@@ -1,5 +1,5 @@
 import React from 'react'
-import './ReviewNB.css'
+import './pagestyles/ReviewNB.css'
 
 function ReviewNB() {
   return (

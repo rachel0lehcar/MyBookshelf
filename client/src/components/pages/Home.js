@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ProgressBar from '../ProgressBar'
-import './Home.css'
+import './pagestyles/Home.css'
 
 function Home() {
   return (
