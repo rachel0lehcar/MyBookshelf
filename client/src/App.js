@@ -5,6 +5,8 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Profile from './components/pages/Profile';
 import NotesRating from './components/pages/NotesRating';
+import ReviewNB from './components/pages/ReviewNB';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Route path="/addbook" element={<AddBook />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/notesrating" element={<NotesRating />} />
+      <Route path="/reviewnb" element={<ReviewNB />} />
     </Routes>
   );
 }
