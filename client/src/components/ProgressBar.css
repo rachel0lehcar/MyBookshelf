@@ -1,4 +1,4 @@
-.container {
+.pb-container {
   margin-top: 200px;
   display: flex;
   flex-direction: column;
@@ -20,11 +20,26 @@
   transition: width 0.3s ease-out;
 }
 
+.pb-line {
+  display: flex;
+  align-items: center;
+}
+
+.status {
+  display: flex;
+  padding: 20px 25px 20px 25px;
+  background: #D8D8FF;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .progress-label {
   margin-top: 10px;
 }
 
-button {
+.pb-button {
   color: white;
   background-color: #175a91;
+  width: 100px;
 }

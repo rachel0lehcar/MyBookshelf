@@ -4,7 +4,7 @@ import './Login.css'
 
 function Login() {
   return (
-    <div className="container">
+    <div className="login-container">
       <div className='text'>
         Log Your Reading <br /><br />
         View your Progress <br /><br />

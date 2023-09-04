@@ -1,0 +1,26 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-element {
+  margin-top: 50px;
+}
+
+.themes {
+  display: flex;
+  align-items: center;
+}
+
+.theme-header {
+  margin-right: 15px;
+}
+
+.theme-color {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  border: 2px solid black;
+}
+

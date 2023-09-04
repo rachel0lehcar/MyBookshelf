@@ -26,18 +26,21 @@ function ProgressBar() {
   };
 
   return (
-    <div className="container">
-      <div className='progress-bar'>
-        <div className="progress-bar-fill" 
-          style={ {width: `${progress}%`, backgroundColor: getColor() }}
-        >
+    <div className="pb-container">
+      <span className="pb-line">
+        <div className='progress-bar'>
+          <div className="progress-bar-fill" 
+            style={ {width: `${progress}%`, backgroundColor: getColor() }}
+          >
 
+          </div>
         </div>
-      </div>
+        <h3 className="status">ON TRACK</h3>
+      </span>
       <div className="progress-label">{progress}%</div>
       {/*<div className="progress-label">2 out of 24 Books</div>*/}
-      <button onClick={handleButtonClick}>Progress</button>
-      <button onClick={handleButtonReset}>Reset</button>
+      <button className="pb-button"onClick={handleButtonClick}>Progress</button>
+      <button className="pb-button"onClick={handleButtonReset}>Reset</button>
     </div>
   )
 }
