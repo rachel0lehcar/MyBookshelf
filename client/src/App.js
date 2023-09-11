@@ -6,12 +6,14 @@ import Login from './components/pages/Login';
 import Profile from './components/pages/Profile';
 import NotesRating from './components/pages/NotesRating';
 import ReviewNB from './components/pages/ReviewNB';
+import Signup from './components/pages/Signup';
 
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
       <Route path="/addbook" element={<AddBook />} />
       <Route path="/profile" element={<Profile />} />

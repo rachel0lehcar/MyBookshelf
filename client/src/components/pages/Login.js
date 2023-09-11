@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import './pagestyles/Login.css'
 
 function Login() {
+
+  const googleAuth = ()=> {
+    window.open(process.env.REACT_APP_GOOGLE_LOGIN,'_self');
+  }
+
   return (
     <div className="login-container">
       <div className='text'>
@@ -25,7 +30,7 @@ function Login() {
           <button className="login-submit">Submit</button>
         </form>
         <div className="option"><span>OR</span></div>
-        <Link className="google-login" to={'/auth/google'}><span>Continue with Google</span></Link>
+        <button className="google-login" onClick={googleAuth}>Continue with Google</button>
         <p className='signup-link'>Need an account? <Link className="signup" to={'/signup'}>SIGN UP</Link></p>
       </article>
     </div>

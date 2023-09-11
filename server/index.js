@@ -15,10 +15,10 @@ app.use(session({
   secret: process.env.SESSION_SECRET, // env variable
   resave: true,
   saveUninitialized: true,
-  cookie: {
+  /*cookie: {
     sameSite: 'none',
     secure: 'true'
-  }
+  }*/
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,7 +51,8 @@ app.get('/auth/failure', (req, res) => {
 });
 
 app.get('/protected', isLoggedIn, (req, res) => {
-  res.send(`Hello ${req.user.displayName}!`);
+  // res.send(`Hello ${req.user.displayName}!`);
+  res.redirect(process.env.REACT_HOME_PAGE);
 });
 
 app.get('/logout', (req, res, next) => {
