@@ -7,6 +7,7 @@ import Profile from './components/pages/Profile';
 import NotesRating from './components/pages/NotesRating';
 import ReviewNB from './components/pages/ReviewNB';
 import Signup from './components/pages/Signup';
+import GoogleBook from './components/pages/GoogleBook';
 
 
 function App() {
@@ -15,10 +16,11 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/addbook" element={<AddBook />} />
+      <Route path="/addbook/:booksearch?" element={<AddBook />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/notesrating" element={<NotesRating />} />
       <Route path="/reviewnb" element={<ReviewNB />} />
+      <Route path="/googlebook/:bookid" element={<GoogleBook />} />
     </Routes>
   );
 }

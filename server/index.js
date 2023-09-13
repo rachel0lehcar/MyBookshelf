@@ -73,8 +73,19 @@ app.get('/googlebooks/:book', (req, res) => {
   //console.log(req.params);
   axios.get('https://www.googleapis.com/books/v1/volumes?q=' + book + '&key=' + process.env.API_KEY + "&maxResults=40")
     .then(data => {
-      //console.log(data);
+      //console.log(data.data);
       res.json(data.data.items);
+    });
+});
+
+app.get('/gbvolume/:bookid', (req, res) => {
+  //console.log('hit gbvolume');
+  const bookid = req.params.bookid;
+  //console.log(bookid);
+  axios.get('https://www.googleapis.com/books/v1/volumes/' + bookid + '?key=' + process.env.API_KEY)
+    .then(data => {
+      //console.log(data.data);
+      res.json(data.data);
     });
 });
 
