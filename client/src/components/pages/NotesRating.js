@@ -1,8 +1,10 @@
 import React from 'react'
 //import Select from 'react-select'
+import { useNavigate } from 'react-router-dom'
 import './pagestyles/NotesRating.css'
 
 function NotesRating() {
+  const navigate = useNavigate();
 
   /*const months = [{January: "January"}, {February: "February"}, {March: "March"}, {April: "April"}, {May: "May"}, {June: "June"}, {July: "July"}, {August: "August"}, {September: "September"}, {October: "October"}, {November: "November"}, {December: "December"}];*/
 
@@ -34,6 +36,8 @@ function NotesRating() {
       </span>
  
       <textarea className="user-notes" type="text" />
+      <button onClick={() => navigate(-1)}>Return to Search Results</button>
+      <button onClick={() => navigate('/reviewnb')}>Review</button>
     </div>
   )
 }

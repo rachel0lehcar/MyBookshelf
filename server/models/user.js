@@ -10,17 +10,15 @@ const collectionSchema = new mongoose.Schema({
 const bookSchema = new mongoose.Schema({
   // imageLink: String,
   title: String,
-  author: String,
+  authors: String,
   genres: [String],
   reRead: Boolean,
-  timesRead: Number, // if >1, reread = true
-  started: [{
-    month: String, 
-    year: Number
-  }],
-  finished: [{
-    month: String, 
-    year: Number
+  //timesRead: Number, // if >1, reread = true
+  timeIntervals: [{
+    startMonth: String, 
+    startYear: Number,
+    finishMonth: String,
+    FinishYear: Number
   }],
   summary: String,
   notes: String,

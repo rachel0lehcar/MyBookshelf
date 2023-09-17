@@ -1,0 +1,13 @@
+.google-book-link .img-text {
+  position:relative;
+  visibility:hidden;
+  z-index: 10;
+  width: max-content;
+
+  background-color: white;
+  border-radius: 5px;
+}
+
+.google-book-link:hover .img-text {
+visibility:visible;
+}

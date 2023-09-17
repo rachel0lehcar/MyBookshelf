@@ -64,7 +64,7 @@ app.get('/logout', (req, res, next) => {
   }); // asynch
 });
 
-/*---------------------------*/
+/*-----------GOOGLE-BOOKS-----------*/
 
 app.get('/googlebooks/:book', (req, res) => {
   //console.log('hit');
@@ -87,6 +87,12 @@ app.get('/gbvolume/:bookid', (req, res) => {
       //console.log(data.data);
       res.json(data.data);
     });
+});
+
+/*------------DATABASE------------*/
+
+app.post('/addgbinfo', (req,res) => {
+  req.user;
 });
 
 app.listen(5000, () => console.log('listening on: 5000'));
