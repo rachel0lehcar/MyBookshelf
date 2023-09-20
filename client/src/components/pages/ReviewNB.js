@@ -35,7 +35,8 @@ function ReviewNB() {
         description: description,
         notes: notes
       })
-    }).then(response => console.log(response));
+    }).then(response => console.log(response))
+    .then(navigate('/addtocollections'));
   }
 
   return (
@@ -56,7 +57,7 @@ function ReviewNB() {
       </div>
       <button onClick={() => saveData()}>Save</button>
       <button onClick={() => navigate(-1)}>Return to Notes</button>
-      <button onClick={() => {navigate('/'); allDone()}}>DONE!</button>
+      <button onClick={() =>  allDone()}>DONE!</button>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import NotesRating from './components/pages/NotesRating';
 import ReviewNB from './components/pages/ReviewNB';
 import Signup from './components/pages/Signup';
 import GoogleBook from './components/pages/GoogleBook';
+import AddToCols from './components/pages/AddToCols';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path="/notesrating" element={<NotesRating />} />
       <Route path="/reviewnb" element={<ReviewNB />} />
       <Route path="/googlebook/:bookid" element={<GoogleBook />} />
+      <Route path="/addtocollections" element={<AddToCols/>} />
     </Routes>
   );
 }

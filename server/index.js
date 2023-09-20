@@ -8,6 +8,7 @@ const axios = require('axios');
 require('dotenv').config();
 require('./auth');
 const Book = require('./models/book.js');
+const Collection = require('./models/collection.js');
 
 
 const app = express();
@@ -122,6 +123,11 @@ app.post('/createnewbook', (req,res) => {
 		
 	}).save().then(console.log('data has been saved!'));
 
+});
+
+app.get('/getcollections', (req,res) => {
+  console.log('bumblegum');
+  console.log(Collection.find());
 });
 
 app.listen(5000, () => console.log('listening on: 5000'));
