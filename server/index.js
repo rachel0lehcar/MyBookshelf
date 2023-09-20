@@ -1,14 +1,17 @@
 const express = require('express');
 const session = require('express-session');
+const bodyParser = require('body-parser')
 const passport = require('passport');
 //const mongoose = require('mongoose');
 //const cors = require('cors');
 const axios = require('axios');
 require('dotenv').config();
 require('./auth');
+const Book = require('./models/book.js');
 
 
 const app = express();
+//mongoose.connect(process.env.MONGO_URI);
 
 //app.use(cors());
 app.use(session({ 
@@ -22,6 +25,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 //const uri = process.env.MONGO_URI;
 
@@ -53,6 +57,10 @@ app.get('/auth/failure', (req, res) => {
 app.get('/protected', isLoggedIn, (req, res) => {
   // res.send(`Hello ${req.user.displayName}!`);
   res.redirect(process.env.REACT_HOME_PAGE);
+});
+
+app.get('/user', (req,res) => {
+  res.send(req.user); // sent user object to frontend
 });
 
 app.get('/logout', (req, res, next) => {
@@ -91,8 +99,29 @@ app.get('/gbvolume/:bookid', (req, res) => {
 
 /*------------DATABASE------------*/
 
-app.post('/addgbinfo', (req,res) => {
-  req.user;
+app.post('/createnewbook', (req,res) => {
+  data = req.body;
+  console.log(data);
+  new Book({
+    userGoogleId: req.user.id,
+		title: data.title,
+    authors: data.authors,
+    genres: data.genres,
+    //reRead: Boolean,
+    //timesRead: Number, // if >1, reread = true
+    timeIntervals: [{
+      startMonth: data.startMonth,
+      startYear: null,
+      finishMonth: data.finishMonth,
+      FinishYear: null
+    }],
+    summary: data.description,
+    notes: data.notes,
+    rating: null,
+    includeOnShelf: null
+		
+	}).save().then(console.log('data has been saved!'));
+
 });
 
 app.listen(5000, () => console.log('listening on: 5000'));

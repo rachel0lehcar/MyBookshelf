@@ -7,13 +7,13 @@ function GoogleBook() {
   const [book, setBook] = useState({});
   const navigate = useNavigate();
 
-  const [newBook, setNewBook] = useState({title: null, authors: null, genres: null, description: null});
+  //const [newBook, setNewBook] = useState({title: null, authors: null, genres: null, description: null});
   const titleRef = useRef();
   const authorsRef = useRef();
   const genresRef = useRef();
   const desRef = useRef();
 
-  console.log("TITLE " + titleRef);
+  //console.log("TITLE " + titleRef);
 
   useEffect(() =>{
     fetch('/gbvolume/' + bookid,{ method: 'GET' }
@@ -30,28 +30,56 @@ function GoogleBook() {
   },[bookid]);
   
   function addTitle() {
-    setNewBook(prevState => {
+    sessionStorage.setItem('title', titleRef.current.innerText);
+    console.log(
+      'title: ' + sessionStorage.getItem('title') +
+      ' author(s): ' + sessionStorage.getItem('authors') +
+      ' descriptioin: ' + sessionStorage.getItem('description') +
+      ' genre(s): ' + sessionStorage.getItem('genres')
+      )
+    /*setNewBook(prevState => {
       console.log(newBook);
       return {...prevState, title: titleRef.current.innerText}
-    });
+    });*/
   } 
   function addAuthors() {
-    setNewBook(prevState => {
+    sessionStorage.setItem('authors', authorsRef.current.innerText);
+    console.log(
+      'title: ' + sessionStorage.getItem('title') +
+      ' author(s): ' + sessionStorage.getItem('authors') +
+      ' descriptioin: ' + sessionStorage.getItem('description') +
+      ' genre(s): ' + sessionStorage.getItem('genres')
+      )
+    /*setNewBook(prevState => {
       console.log(newBook);
       return {...prevState, authors: authorsRef.current.innerText}
-    });
+    });*/
   }
   function addDes() {
-    setNewBook(prevState => {
+    /*setNewBook(prevState => {
       console.log(newBook);
       return {...prevState, description: desRef.current.innerText}
-    });
+    });*/
+    sessionStorage.setItem('description', desRef.current.innerText);
+    console.log(
+      'title: ' + sessionStorage.getItem('title') +
+      ' author(s): ' + sessionStorage.getItem('authors') +
+      ' descriptioin: ' + sessionStorage.getItem('description') +
+      ' genre(s): ' + sessionStorage.getItem('genres')
+      )
   }
   function addGenres() {
-    setNewBook(prevState => {
+    sessionStorage.setItem('genres', genresRef.current.innerText);
+    console.log(
+      'title: ' + sessionStorage.getItem('title') +
+      ' author(s): ' + sessionStorage.getItem('authors') +
+      ' descriptioin: ' + sessionStorage.getItem('description') +
+      ' genre(s): ' + sessionStorage.getItem('genres')
+      )
+    /*setNewBook(prevState => {
       console.log(newBook);
       return {...prevState, genres: genresRef.current.innerText}
-    });
+    });*/
   }
 
   /*function saveToDB() {

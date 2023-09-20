@@ -1,40 +1,15 @@
 const mongoose = require('mongoose');
 const findOrCreate = require('mongoose-findorcreate');
 
-const collectionSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  createdAt: {type: Date, required: true},
-  books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'bookSchema' }]
-});
-
-const bookSchema = new mongoose.Schema({
-  // imageLink: String,
-  title: String,
-  authors: String,
-  genres: [String],
-  reRead: Boolean,
-  //timesRead: Number, // if >1, reread = true
-  timeIntervals: [{
-    startMonth: String, 
-    startYear: Number,
-    finishMonth: String,
-    FinishYear: Number
-  }],
-  summary: String,
-  notes: String,
-  rating: Number,
-  includeOnShelf: Boolean,
-  collections: [{ type: mongoose.Schema.Types.ObjectId, ref: 'collectionSchema' }]
-});
-
 const userSchema = new mongoose.Schema({
   googleId: String,
   // profilePicLink: String,
   username: String,
-  books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'bookSchema' }],
+  //books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'bookSchema' }],
   goal: {
     numberOfBooks: Number,
-    year: Number
+    year: Number,
+    currentNOB: Number
   },
   previousGoals: [{
     numberOfBooks: Number,
