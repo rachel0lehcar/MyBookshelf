@@ -1,7 +1,9 @@
 :root {
   /* COLORS */
-  --hot-pink: #FFAAD4;
-  --lavendar: #D8D8FF;
+  /*--hot-pink: #FFAAD4;
+  --lavendar: #D8D8FF;*/
+  --base1: $primary;
+  --base2: #D8D8FF;
 
   /* FONT SIZES */
 
@@ -29,7 +31,7 @@
 }
 
 html {
-  background: linear-gradient(var(--hot-pink), var(--lavendar));
+  background: linear-gradient(var(--base1), var(--base2));
   min-height: 100%;
 }
 

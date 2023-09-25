@@ -9,9 +9,20 @@ import ReviewNB from './components/pages/ReviewNB';
 import Signup from './components/pages/Signup';
 import GoogleBook from './components/pages/GoogleBook';
 import AddToCols from './components/pages/AddToCols';
-
+import { useState, useLayoutEffect } from 'react';
 
 function App() {
+
+  const [color,setColor] = useState('#FFAAD4');
+
+  useLayoutEffect(() => {
+    const c = localStorage.getItem('background-color');
+    if(c!=null) {
+      setColor(localStorage.getItem('background-color'))
+    }
+    document.documentElement.style.setProperty('--base1',color);
+  },[color]);
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />

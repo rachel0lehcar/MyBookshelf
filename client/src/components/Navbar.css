@@ -7,7 +7,7 @@
   position: fixed;
   top: 0px;
   width: 100%;
-  background-color: var(--hot-pink);
+  background-color: var(--base1);
 
   display: flex;
   align-items: center;
