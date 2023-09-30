@@ -33,7 +33,7 @@ function App() {
       <Route path="/notesrating" element={<NotesRating />} />
       <Route path="/reviewnb" element={<ReviewNB />} />
       <Route path="/googlebook/:bookid" element={<GoogleBook />} />
-      <Route path="/addtocollections" element={<AddToCols/>} />
+      <Route path="/addtocollections/:objectid" element={<AddToCols/>} />
     </Routes>
   );
 }

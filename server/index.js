@@ -103,7 +103,7 @@ app.get('/gbvolume/:bookid', (req, res) => {
 app.post('/createnewbook', (req,res) => {
   data = req.body;
   console.log(data);
-  new Book({
+  const book = new Book({
     userGoogleId: req.user.id,
 		title: data.title,
     authors: data.authors,
@@ -121,13 +121,47 @@ app.post('/createnewbook', (req,res) => {
     rating: null,
     includeOnShelf: null
 		
-	}).save().then(console.log('data has been saved!'));
+	}).save().then(console.log('data has been saved!'))
+  .then(res.json(book._id));
 
 });
 
-app.get('/getcollections', (req,res) => {
-  console.log('bumblegum');
-  console.log(Collection.find());
+app.get('/getbook', async(req,res) => { // single book (maybe have this be to get all books too? or different route)
+  const objectid = req.body.objectid;
+  const book = await Book.find({_id: objectid})
+  res.json(book);
 });
+
+app.get('/getcollections', async(req,res) => {
+  const data = await Collection.find().then(console.log("data collected!"));
+  //console.log(data);
+  res.json(data);
+});
+
+
+app.post('/newcollection', async(req,res) => {
+  const newList = req.body.newList;
+  console.log(newList);
+
+  const count = await Collection.find({name:newList}).count();
+  console.log(count);
+  if(count != 0) {
+    console.log("Already a List");
+    res.json("Already a List");
+  }
+  else {
+    console.log("new collection");
+    new Collection({
+      googleId: process.env.TEST_GOOGLE_ID,
+      name: newList
+    }).save().then(res.json("data saved!"))
+  }
+});
+
+
+/*app.post('/savetocollections', (req,res) => {
+  const objectid = req.body.objectid;
+  
+})*/
 
 app.listen(5000, () => console.log('listening on: 5000'));

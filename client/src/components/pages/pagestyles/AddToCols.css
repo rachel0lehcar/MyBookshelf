@@ -1,0 +1,40 @@
+.add-to-cols {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-cols {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  height: 385px;
+  width: 375px;
+  padding: 40px;
+}
+
+.select-options-list {
+  background-color: rgb(255, 192, 234);
+  margin-top: 10px;
+  height: 70%;
+  margin-bottom: 10px;
+  overflow-y: auto;
+}
+
+.select-option {
+  display: flex;
+  gap: 10px;
+  font-size: 25px;
+}
+
+#new-list {
+  padding-left: 10px;
+  text-align: center;
+  padding: 1px;
+}
+

@@ -35,8 +35,8 @@ function ReviewNB() {
         description: description,
         notes: notes
       })
-    }).then(response => console.log(response))
-    .then(navigate('/addtocollections'));
+    }).then(response => response.json())
+    .then(data => navigate(`/addtocollections/${data}`)); // object id of new book
   }
 
   return (
