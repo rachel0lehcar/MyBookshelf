@@ -63,7 +63,8 @@ function AddToCols() {
     }));
   }
 
-  /*function saveToCollections() {
+  function saveToCollections(event) {
+    event.preventDefault();
     fetch('/savetocollections', {
       method: 'POST',
       headers: {
@@ -73,8 +74,9 @@ function AddToCols() {
         objectid: objectid,
         collections: checked
       })
-    }).then(response => response.json());
-  }*/
+    }).then(response => response.json())
+    .then(response => console.log(response));
+  }
 
   return (
     <div className='page-content add-to-cols'>
@@ -104,7 +106,7 @@ function AddToCols() {
         <button htmlFor="new-list" onClick={addNewList}>+</button>
         
       </form>
-      {/* <input form='collection-form' type="submit" value="Submit" onClick={saveToCollections}/> */}
+      <input form='collection-form' type="submit" value="Submit" onClick={saveToCollections}/>
 
     </div>
   )

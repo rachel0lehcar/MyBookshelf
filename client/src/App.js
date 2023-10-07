@@ -16,9 +16,9 @@ function App() {
   const [color,setColor] = useState('#FFAAD4');
 
   useLayoutEffect(() => {
-    const c = localStorage.getItem('background-color');
-    if(c!=null) {
-      setColor(localStorage.getItem('background-color'))
+    const backgroundColor = localStorage.getItem('background-color');
+    if(backgroundColor!=null) {
+      setColor(backgroundColor);
     }
     document.documentElement.style.setProperty('--base1',color);
   },[color]);

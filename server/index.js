@@ -159,9 +159,25 @@ app.post('/newcollection', async(req,res) => {
 });
 
 
-/*app.post('/savetocollections', (req,res) => {
-  const objectid = req.body.objectid;
-  
-})*/
+app.post('/savetocollections', (req,res) => {
+  const objectid = req.body.objectid; // objectid of book
+  const collections = req.body.collections; // collections to add this book to
+
+  // add book to the checked collections
+  collections.map((collection) => {
+    Collection.updateOne( 
+      { name: collection, 'books': {$ne: objectid} }, 
+      { $push : { books: objectid }
+    }).then(console.log("pushed to " + collection));
+  });
+
+  // remove book from unchecked collections
+  Collection.updateMany(
+    { name:   { $nin: collections } },
+    { $pull : { books: objectid } }
+  ).then(console.log("pulled collections not in [" + collections + "]"));
+
+  res.json('Updated Collections!');
+})
 
 app.listen(5000, () => console.log('listening on: 5000'));
