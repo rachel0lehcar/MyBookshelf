@@ -10,7 +10,7 @@ import Signup from './components/pages/Signup';
 import GoogleBook from './components/pages/GoogleBook';
 import AddToCols from './components/pages/AddToCols';
 import MyBooks from './components/pages/MyBooks';
-import MyCollection from './components/pages/MyCollection';
+import MyCollections from './components/pages/MyCollections';
 import SingleBook from './components/pages/SingleBook';
 import { useState, useLayoutEffect } from 'react';
 
@@ -37,8 +37,8 @@ function App() {
       <Route path="/reviewnb" element={<ReviewNB />} />
       <Route path="/googlebook/:bookid" element={<GoogleBook />} />
       <Route path="/addtocollections/:objectid" element={<AddToCols/>} />
-      <Route path="/mybooks" element={<MyBooks />} />
-      <Route path="/mycollection" element={<MyCollection />} />
+      <Route path="/mybooks/:collectionid?" element={<MyBooks />} />
+      <Route path="/mycollections" element={<MyCollections />} />
       <Route path="/singlebook" element={<SingleBook />} />
     </Routes>
   );

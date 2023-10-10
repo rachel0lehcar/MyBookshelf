@@ -132,6 +132,18 @@ app.get('/getbook', async(req,res) => { // single book (maybe have this be to ge
   res.json(book);
 });
 
+/*app.get('/getallbooks', async(req,res) => {
+  console.log('fetch');
+  const collectionid = req.body.collectionid;
+  let parameters = {};
+  if(collectionid)
+    parameters = {_id: collectionid};
+
+  const myBooks = await Book.find(parameters);
+  console.log(myBooks);
+  res.json(myBooks);
+})*/
+
 app.get('/getcollections', async(req,res) => {
   const data = await Collection.find().then(console.log("data collected!"));
   //console.log(data);
