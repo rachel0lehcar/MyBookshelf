@@ -171,23 +171,38 @@ app.post('/newcollection', async(req,res) => {
 });
 
 
-app.post('/savetocollections', (req,res) => {
+app.post('/savetocollections', async(req,res) => {
   const objectid = req.body.objectid; // objectid of book
   const collections = req.body.collections; // collections to add this book to
+  const updatedCols = [];
+  //const collectionNames = [];
 
   // add book to the checked collections
-  collections.map((collection) => {
-    Collection.updateOne( 
-      { name: collection, 'books': {$ne: objectid} }, 
-      { $push : { books: objectid }
+  await Promise.all(collections.map(async(collection) => {
+    const found = await Collection.findOneAndUpdate( 
+      { name: collection}, 
+      { $addToSet : { books: objectid }
     }).then(console.log("pushed to " + collection));
-  });
-
+    if(found) {
+      updatedCols.push({name: found.name, collectionId: found._id});
+      //collectionNames.push(found.name);
+    }
+  }));
   // remove book from unchecked collections
   Collection.updateMany(
     { name:   { $nin: collections } },
     { $pull : { books: objectid } }
   ).then(console.log("pulled collections not in [" + collections + "]"));
+
+  Book.updateOne( // add new collectionIds to book
+    { _id: objectid },
+    { $set: { 'collections': updatedCols } }
+    /*{ $pull: { 'collections': { $nin: updatedCols} } },
+    { $addToSet: {'collections':{ $each: updatedCols} } }*/
+  ).then(console.log("updated book collection list"));
+
+  const book = await Book.findById(objectid);
+  console.log(book.title + " " + book.collections);
 
   res.json('Updated Collections!');
 })

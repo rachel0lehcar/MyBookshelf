@@ -17,8 +17,13 @@ const bookSchema = new mongoose.Schema({
   summary: String,
   notes: String,
   rating: Number,
-  includeOnShelf: Boolean
-  //collections: [{ type: mongoose.Schema.Types.ObjectId, ref: 'collectionSchema' }]
+  includeOnShelf: Boolean,
+  collections: [{ 
+    _id : false,
+    collectionId: { type: mongoose.Schema.Types.ObjectId, ref: 'collectionSchema' },
+    name: String
+  }],
+  //collectionNames: [{type: String}]
 });
 
 module.exports = mongoose.model("Book", bookSchema);
