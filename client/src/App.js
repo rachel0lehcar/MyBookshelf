@@ -37,9 +37,9 @@ function App() {
       <Route path="/reviewnb" element={<ReviewNB />} />
       <Route path="/googlebook/:bookid" element={<GoogleBook />} />
       <Route path="/addtocollections/:objectid" element={<AddToCols/>} />
-      <Route path="/mybooks/:collectionid?" element={<MyBooks />} />
+      <Route path="/mybooks/:collectionName?" element={<MyBooks />} />
       <Route path="/mycollections" element={<MyCollections />} />
-      <Route path="/singlebook" element={<SingleBook />} />
+      <Route path="/singlebook/:bookid" element={<SingleBook />} />
     </Routes>
   );
 }

@@ -126,23 +126,26 @@ app.post('/createnewbook', (req,res) => {
 
 });
 
-app.get('/getbook', async(req,res) => { // single book (maybe have this be to get all books too? or different route)
-  const objectid = req.body.objectid;
-  const book = await Book.find({_id: objectid})
+app.post('/getbook', async(req,res) => { // single book (maybe have this be to get all books too? or different route)
+  const book = await Book.findOne({_id: req.body.bookid});
+  console.log(book.title);
   res.json(book);
 });
 
-/*app.get('/getallbooks', async(req,res) => {
-  console.log('fetch');
-  const collectionid = req.body.collectionid;
+app.post('/getallbooks', async(req,res) => {
+  // ADD CONDITIONS DEPENDING ON SEARCH PARAMETERS (ex. Null collection or by title)
+  const collectionName = req.body.collectionName;
   let parameters = {};
-  if(collectionid)
-    parameters = {_id: collectionid};
+  if(collectionName)
+    parameters = {name: collectionName};
 
-  const myBooks = await Book.find(parameters);
-  console.log(myBooks);
+  const myCollection = await Collection.findOne(parameters);
+  const myBooks = await Book.find({_id : {$in: myCollection.books}});
+  
+  if(collectionName)
+    console.log("found books from '" + collectionName + "' collection");
   res.json(myBooks);
-})*/
+});
 
 app.get('/getcollections', async(req,res) => {
   const data = await Collection.find().then(console.log("data collected!"));

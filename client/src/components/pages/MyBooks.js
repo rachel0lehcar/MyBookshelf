@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function MyBooks() {
-  // const { collectionid } = useParams();
-  // const [myBooks, setMyBooks] = new useState([]);
+  const { collectionName } = useParams();
+  const [myBooks, setMyBooks] = useState([]);
   
 
-  /*useEffect(() => {
+  useEffect(() => {
     //fetch('/getallbooks');
     fetch('/getallbooks', {
       method: 'POST',
@@ -14,21 +14,22 @@ function MyBooks() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        collectionid: collectionid
+        collectionName: collectionName
       })
     }).then(response => response.json())
-    .then(response => setMyBooks(response))
-    .then(console.log(myBooks));
+    .then(response => setMyBooks(response));
+    //.then(console.log(myBooks));
 
-  },[])*/
+  },[]);
 
   return (
     <div className='page-content'>
-      {/* {myBooks.map((book) => {
+      <h1>{collectionName}</h1>
+      {myBooks.map((book) => {
         return(
-          <h1>{book.title}</h1>
+          <Link to={`/singlebook/${book._id}`}><h3>{book.title}</h3></Link>
         )
-     })} */}
+     })}
     </div>
   )
 }

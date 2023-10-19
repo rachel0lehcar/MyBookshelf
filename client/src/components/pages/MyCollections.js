@@ -17,7 +17,7 @@ function MyCollections() {
     <div className='page-content'>
      {collections.map((collection) => {
         return(
-          <Link to={'/mybooks/'+ collection._id}>
+          <Link to={'/mybooks/'+ collection.name}>
             <h1>{collection.name}</h1>
           </Link>
         )
