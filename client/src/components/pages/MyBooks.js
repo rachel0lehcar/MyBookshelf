@@ -24,7 +24,7 @@ function MyBooks() {
 
   return (
     <div className='page-content'>
-      <h1>{collectionName}</h1>
+      <h1>{collectionName ? collectionName : "ALL BOOKS"}</h1>
       {myBooks.map((book) => {
         return(
           <Link to={`/singlebook/${book._id}`}><h3>{book.title}</h3></Link>

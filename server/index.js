@@ -136,12 +136,12 @@ app.post('/getallbooks', async(req,res) => {
   // ADD CONDITIONS DEPENDING ON SEARCH PARAMETERS (ex. Null collection or by title)
   const collectionName = req.body.collectionName;
   let parameters = {};
-  if(collectionName)
-    parameters = {name: collectionName};
+  if(collectionName) {
+    const myCollection = await Collection.findOne({name: collectionName});
+    parameters._id = {$in: myCollection.books};
+  }
+  const myBooks = await Book.find(parameters);
 
-  const myCollection = await Collection.findOne(parameters);
-  const myBooks = await Book.find({_id : {$in: myCollection.books}});
-  
   if(collectionName)
     console.log("found books from '" + collectionName + "' collection");
   res.json(myBooks);
