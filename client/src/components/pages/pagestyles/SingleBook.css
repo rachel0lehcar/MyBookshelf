@@ -1,0 +1,49 @@
+.left-right {
+  display: flex;
+}
+
+.right {
+  display: grid;
+  grid-auto-columns: 1fr;
+
+}
+
+.switch {
+  display: flex;
+  gap: 2px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: black;
+  border: 2px solid #000000;
+
+}
+.switch-btn {
+  width: 50%;
+  height: 64px;
+  border: none;
+  background: #EBEBFF;
+  padding: 17px;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+.switch-btn:hover {
+  cursor: pointer;
+}
+.switch-btn:focus {
+  background: #4D535E;
+  box-shadow: inset -5px -5px 10px 5px rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+.summary-notes {
+  width: 550px;
+  height: 475px;
+  /*left: 592px;
+  top: 220px;*/
+  box-sizing: border-box;
+  padding: 27px;
+
+  background: #F2F9FF;
+  box-shadow: inset 4px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
