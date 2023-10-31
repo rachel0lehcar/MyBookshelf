@@ -1,8 +1,9 @@
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser')
 const passport = require('passport');
-//const mongoose = require('mongoose');
+const { default: mongoose } = require('mongoose');
 //const cors = require('cors');
 const axios = require('axios');
 require('dotenv').config();
@@ -12,11 +13,12 @@ const Collection = require('./models/collection.js');
 
 
 const app = express();
-//mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI);
 
 //app.use(cors());
 app.use(session({ 
   secret: process.env.SESSION_SECRET, // env variable
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   resave: true,
   saveUninitialized: true,
   /*cookie: {

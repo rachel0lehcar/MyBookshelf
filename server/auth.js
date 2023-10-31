@@ -1,10 +1,7 @@
-const { default: mongoose } = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const User = require('./models/user.js');
 require('dotenv').config();
-
-mongoose.connect(process.env.MONGO_URI);
 
 // env variables
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
