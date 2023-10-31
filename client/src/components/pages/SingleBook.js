@@ -36,16 +36,16 @@ function SingleBook() {
     <div className='page-content left-right'> 
     {book ? 
       <>
-        <div className="left">
+        <div className="book-left">
           <h1>{book.title}</h1>
           <p>Author: {book.authors}</p>
           <p>Genres: {book.genres}</p>
           <h2>Included in...</h2>
-          {book.collections.map(col => {
+          {book.collections?.map(col => {
             return( <p>{col.name}</p> )
           })}
         </div>
-        <div className="right">
+        <div className="book-right">
           <div className="switch">
             <button className="switch-btn"onClick={summaryClick}>SUMMARY</button>
             <button className="switch-btn"onClick={notesClick}>NOTES</button>

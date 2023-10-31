@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.right {
+.book-right {
   display: grid;
   grid-auto-columns: 1fr;
 
