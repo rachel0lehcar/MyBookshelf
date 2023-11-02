@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './pagestyles/AddToCols.css'
 
 
@@ -10,6 +10,7 @@ function AddToCols() {
   const [newList, setNewList] = useState("");
   const [NLCounter, setNLCounter] = useState(0);
   const checkboxesEnd = useRef();
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -75,7 +76,8 @@ function AddToCols() {
         collections: checked
       })
     }).then(response => response.json())
-    .then(response => console.log(response));
+    .then(response => console.log(response))
+    .then(navigate('/'));
   }
 
   return (

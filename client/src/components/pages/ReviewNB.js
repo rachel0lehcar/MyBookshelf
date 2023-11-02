@@ -36,7 +36,10 @@ function ReviewNB() {
         notes: notes
       })
     }).then(response => response.json())
-    .then(data => navigate(`/addtocollections/${data}`)); // object id of new book
+    .then(data => {
+      sessionStorage.clear();
+      navigate(`/addtocollections/${data}`); // object id of new book
+    })
   }
 
   return (

@@ -3,11 +3,14 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser')
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const { default: mongoose } = require('mongoose');
-//const cors = require('cors');
+const cors = require('cors');
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 require('./auth');
+const User = require('./models/user.js');
 const Book = require('./models/book.js');
 const Collection = require('./models/collection.js');
 
@@ -15,7 +18,11 @@ const Collection = require('./models/collection.js');
 const app = express();
 mongoose.connect(process.env.MONGO_URI);
 
-//app.use(cors());
+app.use(cors({
+  origin: process.env.REACT_PAGE,
+  credentials: true
+}));
+
 app.use(session({ 
   secret: process.env.SESSION_SECRET, // env variable
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
@@ -26,9 +33,11 @@ app.use(session({
     secure: 'true'
   }*/
 }));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //const uri = process.env.MONGO_URI;
 
@@ -42,6 +51,50 @@ app.get('/', (req, res) => {
   res.send('<a href="/auth/google">Authenticate with Google</a>');
 });
 
+// Local Strategy
+app.post('/register', async(req, res) => {
+  console.log(req.body);
+  const user = await User.findOne({ email: req.body.email });
+  if(user) {
+    res.send(false);
+  }
+  else {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = new User({
+      email: req.body.email,
+      password: hashedPassword
+    }).save()
+    .then(console.log("user created!"))
+    .then(res.send(true));
+  }
+});
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/auth/failure' }),
+  function(req, res) {
+    console.log(req.user);
+    if(!req.user)
+      res.send(false);
+    res.send(true);
+    //res.redirect('/');
+  });
+/*app.post('/login', (req, res) => {
+  console.log("peach");
+  passport.authenticate('local', { failureRedirect: '/auth/failure' }),
+    function (err, user, info) {
+      if(err) throw err;
+      if(!user) res.send('No user exists');
+      else {
+        req.logIn(user, err => {
+          if(err) throw err;
+          console.log("Successfuly Authenticated");
+          res.send(true);
+        });
+      }
+    };
+});*/
+
+// Google Strategy
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['email', 'profile'] })
 );
@@ -51,18 +104,20 @@ app.get('/google/callback',
     successRedirect: '/protected',
     failureRedirect: '/auth/failure',
   })
-)
+);
 
+// General Auth Routes
 app.get('/auth/failure', (req, res) => {
   res.send('something went wrong...')
 });
 
 app.get('/protected', isLoggedIn, (req, res) => {
   // res.send(`Hello ${req.user.displayName}!`);
-  res.redirect(process.env.REACT_HOME_PAGE);
+  res.redirect(process.env.REACT_PAGE);
 });
 
 app.get('/user', (req,res) => {
+  // send the mongodb document without the sensitive information
   res.send(req.user); // sent user object to frontend
 });
 
@@ -106,7 +161,7 @@ app.post('/createnewbook', (req,res) => {
   data = req.body;
   console.log(data);
   const book = new Book({
-    userGoogleId: req.user.id,
+    //userGoogleId: req.user.id,
 		title: data.title,
     authors: data.authors,
     genres: data.genres,
@@ -123,7 +178,13 @@ app.post('/createnewbook', (req,res) => {
     rating: null,
     includeOnShelf: null
 		
-	}).save().then(console.log('data has been saved!'))
+	})
+  if(req.user.email != null)
+    book.userEmail = req.user.email;
+  else
+    book.userGoogleId = req.user.id;
+
+  book.save().then(console.log('data has been saved!'))
   .then(res.json(book._id));
 
 });
@@ -138,6 +199,11 @@ app.post('/getallbooks', async(req,res) => {
   // ADD CONDITIONS DEPENDING ON SEARCH PARAMETERS (ex. Null collection or by title)
   const collectionName = req.body.collectionName;
   let parameters = {};
+  if(req.user.email != null)
+     parameters.userEmail = req.user.email;
+    else
+      parameters.userGoogleId = req.user.id;
+
   if(collectionName) {
     const myCollection = await Collection.findOne({name: collectionName});
     parameters._id = {$in: myCollection.books};
@@ -150,7 +216,13 @@ app.post('/getallbooks', async(req,res) => {
 });
 
 app.get('/getcollections', async(req,res) => {
-  const data = await Collection.find().then(console.log("data collected!"));
+  let parameters = {};
+  if(req.user.email != null)
+    parameters.userEmail = req.user.email;
+  else
+    parameters.userGoogleId = req.user.id;
+    
+  const data = await Collection.find(parameters).then(console.log("data collected!"));
   //console.log(data);
   res.json(data);
 });
@@ -168,10 +240,16 @@ app.post('/newcollection', async(req,res) => {
   }
   else {
     console.log("new collection");
-    new Collection({
-      googleId: process.env.TEST_GOOGLE_ID,
+    const collection = new Collection({
+      //googleId: process.env.TEST_GOOGLE_ID,
       name: newList
-    }).save().then(res.json("data saved!"))
+    })
+    if(req.user.email != null)
+      collection.userEmail = req.user.email;
+    else
+      collection.userGoogleId = req.user.id;
+      
+    collection.save().then(res.json("data saved!"));
   }
 });
 

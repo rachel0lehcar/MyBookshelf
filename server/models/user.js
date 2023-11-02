@@ -3,8 +3,10 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const userSchema = new mongoose.Schema({
   googleId: String,
+  email: String,
   // profilePicLink: String,
   username: String,
+  password: String,
   //books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'bookSchema' }],
   goal: {
     numberOfBooks: Number,
