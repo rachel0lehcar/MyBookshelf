@@ -179,10 +179,10 @@ app.post('/createnewbook', (req,res) => {
     includeOnShelf: null
 		
 	})
-  if(req.user.email != null)
-    book.userEmail = req.user.email;
-  else
+  if(req.user.provider == 'google')
     book.userGoogleId = req.user.id;
+  else
+    book.userEmail = req.user.email;
 
   book.save().then(console.log('data has been saved!'))
   .then(res.json(book._id));
@@ -199,10 +199,10 @@ app.post('/getallbooks', async(req,res) => {
   // ADD CONDITIONS DEPENDING ON SEARCH PARAMETERS (ex. Null collection or by title)
   const collectionName = req.body.collectionName;
   let parameters = {};
-  if(req.user.email != null)
-     parameters.userEmail = req.user.email;
-    else
-      parameters.userGoogleId = req.user.id;
+  if(req.user.provider == 'google')
+    parameters.userGoogleId = req.user.id;
+  else
+    parameters.userEmail = req.user.email;
 
   if(collectionName) {
     const myCollection = await Collection.findOne({name: collectionName});
@@ -217,10 +217,10 @@ app.post('/getallbooks', async(req,res) => {
 
 app.get('/getcollections', async(req,res) => {
   let parameters = {};
-  if(req.user.email != null)
-    parameters.userEmail = req.user.email;
-  else
+  if(req.user.provider == 'google')
     parameters.userGoogleId = req.user.id;
+  else
+    parameters.userEmail = req.user.email;
     
   const data = await Collection.find(parameters).then(console.log("data collected!"));
   //console.log(data);
@@ -241,13 +241,12 @@ app.post('/newcollection', async(req,res) => {
   else {
     console.log("new collection");
     const collection = new Collection({
-      //googleId: process.env.TEST_GOOGLE_ID,
       name: newList
     })
-    if(req.user.email != null)
-      collection.userEmail = req.user.email;
-    else
+    if(req.user.provider == 'google')
       collection.userGoogleId = req.user.id;
+    else
+      collection.userEmail = req.user.email;
       
     collection.save().then(res.json("data saved!"));
   }
