@@ -47,6 +47,17 @@ function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401); // if request has a user already (else give 401)
 }
 
+app.get('/isLoggedIn', (req,res) => {
+  if(req.user) {
+    console.log(true);
+    res.json("bumble");
+  }
+  else {
+    console.log(false);
+    res.json("buzz"); 
+  }
+});
+
 app.get('/', (req, res) => {
   res.send('<a href="/auth/google">Authenticate with Google</a>');
 });

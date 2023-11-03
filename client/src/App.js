@@ -13,6 +13,7 @@ import MyBooks from './components/pages/MyBooks';
 import MyCollections from './components/pages/MyCollections';
 import SingleBook from './components/pages/SingleBook';
 import { useState, useLayoutEffect } from 'react';
+import PrivateRoutes from './PrivateRoutes';
 
 function App() {
 
@@ -30,16 +31,21 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/addbook/:booksearch?" element={<AddBook />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/notesrating" element={<NotesRating />} />
-      <Route path="/reviewnb" element={<ReviewNB />} />
-      <Route path="/googlebook/:bookid" element={<GoogleBook />} />
-      <Route path="/addtocollections/:objectid" element={<AddToCols/>} />
-      <Route path="/mybooks/:collectionName?" element={<MyBooks />} />
-      <Route path="/mycollections" element={<MyCollections />} />
-      <Route path="/singlebook/:bookid" element={<SingleBook />} />
+
+      <Route element={<PrivateRoutes/>}>
+
+        <Route path="/" element={<Home />} />
+        <Route path="/addbook/:booksearch?" element={<AddBook />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/notesrating" element={<NotesRating />} />
+        <Route path="/reviewnb" element={<ReviewNB />} />
+        <Route path="/googlebook/:bookid" element={<GoogleBook />} />
+        <Route path="/addtocollections/:objectid" element={<AddToCols/>} />
+        <Route path="/mybooks/:collectionName?" element={<MyBooks />} />
+        <Route path="/mycollections" element={<MyCollections />} />
+        <Route path="/singlebook/:bookid" element={<SingleBook />} />
+        
+      </Route>
     </Routes>
   );
 }
